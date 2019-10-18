@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>AngularJS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.js"></script>
+    <script src="http://bradleytrager.github.io/angular-combo-box/bower_components/angular-combo-box/dist/angular-combo-box.min.js"></script>
+
+    <script th:src="@{/main.js}"></script>
+    <link th:href="@{/main.css}" rel="stylesheet"/>
+
+    <head>
+<body ng-app="EmployeeManagement" ng-controller="EmployeeController">
+<h3>
+    Организации
+</h3>
+<form ng-submit="submitEmployee()">
+    <table border="0">
+        <tr>
+            <td>Emp Name</td>
+            <td><input type="text" ng-model="employeeForm.empName"/></td>
+        </tr>
+        <tr>
+            <td>Выбор головной организации</td>
+            <td>
+                <select ng-model="employeeForm.empNo" ng-options="opt.name for opt in employees"></select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Подтвердить" class="blue-button"/>
+            </td>
+        </tr>
+    </table>
+</form>
+<br/>
+<a class="create-button" ng-click="createEmployee()">Create Employee</a>
+<table border="1">
+    <tr>
+        <th>Название</th>
+        <th>Количество сотрудников</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <!-- $scope.employees -->
+    <tr ng-repeat="employee in employees" class="table-cell">
+        <td> {{ employee.name }}</td>
+        <td>{{ employee.count }}</td>
+        <td>
+            <a ng-click="editEmployee(employee)" class="edit-button">Edit</a>
+        </td>
+        <td>
+            <a ng-click="deleteEmployee(employee)" class="delete-button">Delete</a>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
