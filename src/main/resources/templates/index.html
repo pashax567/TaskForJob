@@ -16,18 +16,23 @@
 <form ng-submit="submitEmployee()">
     <table border="0">
         <tr>
-            <td>Emp Name</td>
+            <td>Название</td>
             <td><input type="text" ng-model="employeeForm.empName"/></td>
         </tr>
         <tr>
             <td>Выбор головной организации</td>
             <td>
-                <select ng-model="employeeForm.empNo" ng-options="opt.name for opt in employees"></select>
+                <select ng-show="!withoutHeadOrg" ng-model="employeeForm.empNo"
+                        ng-options="opt.name for opt in employees"></select>
+            </td>
+            <td>
+                Без головной организации
+                <input type="checkbox" ng-model="withoutHeadOrg">
             </td>
         </tr>
         <tr>
             <td colspan="2">
-                <input type="submit" value="Подтвердить" class="blue-button"/>
+                <input type="submit" value={{namebtn}} class="blue-button"/>
             </td>
         </tr>
     </table>

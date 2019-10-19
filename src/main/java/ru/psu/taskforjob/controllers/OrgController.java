@@ -30,4 +30,8 @@ public class OrgController {
     public Map<String, Object> update(@RequestBody Map<String, String> org){
         return orgService.updateOrg(org);
     }
+    @DeleteMapping("delete")
+    public void delete(@RequestParam UUID id){
+        orgService.deleteOrg(id);
+    }
 }

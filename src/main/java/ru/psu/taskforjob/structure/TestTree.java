@@ -1,5 +1,6 @@
 package ru.psu.taskforjob.structure;
 
+import org.jooq.impl.DSL;
 import ru.psu.taskforjob.dto.org;
 
 import java.util.ArrayList;
@@ -19,7 +20,6 @@ public class TestTree {
         }};
         TreeWork treeWork = new TreeWork(input);
         Node<org> work = treeWork.work();
-
     }
 
 }
