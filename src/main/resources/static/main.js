@@ -1,4 +1,4 @@
-var app = angular.module("EmployeeManagement", ['ngComboBox']);
+var app = angular.module("EmployeeManagement", ['ngComboBox','angularUtils.directives.dirPagination']);
 
 // Controller Part
 app.controller("EmployeeController", function ($scope, $http) {
@@ -11,6 +11,8 @@ app.controller("EmployeeController", function ($scope, $http) {
         empName: ""
     };
     $scope.namebtn = 'Создать';
+    $scope.models =
+        [ { name: 'model1', town: 'London'}, { name: 'model2', town: 'London'}, { name: 'model3', town: 'Paris'}, { name: 'model4', town: 'Paris'}];
 
     // $scope.months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
@@ -27,7 +29,7 @@ app.controller("EmployeeController", function ($scope, $http) {
         var headId = "";
         if ($scope.employeeForm.empNo)
             headId = $scope.employeeForm.empNo.id;
-        if ($scope.withoutHeadOrg)
+        if ($scope.withoutHeadOrg || headId==undefined)
             headId = "";
         if ($scope.employeeForm.empId == -1) {
             $http({
@@ -76,7 +78,7 @@ app.controller("EmployeeController", function ($scope, $http) {
 
     // In case of edit
     $scope.editEmployee = function (employee) {
-        $scope.namebtn = 'Изменит';
+        $scope.namebtn = 'Изменить';
         $scope.withoutHeadOrg=false;
         $scope.employeeForm.empId = employee.id;
         $scope.employeeForm.empNo=null;
@@ -122,7 +124,6 @@ app.controller("EmployeeController", function ($scope, $http) {
     function _clearFormData() {
         $scope.namebtn = 'Создать';
         $scope.employeeForm.empId = -1;
-        $scope.employeeForm.empNo = "";
         $scope.employeeForm.empName = ""
     };
 });

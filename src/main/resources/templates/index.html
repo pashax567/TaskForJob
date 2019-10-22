@@ -6,6 +6,7 @@
     <script src="http://bradleytrager.github.io/angular-combo-box/bower_components/angular-combo-box/dist/angular-combo-box.min.js"></script>
 
     <script th:src="@{/main.js}"></script>
+    <script src="lib/dirPagination.js"></script>
     <link th:href="@{/main.css}" rel="stylesheet"/>
 
     <head>
@@ -39,6 +40,12 @@
 </form>
 <br/>
 <a class="create-button" ng-click="createEmployee()">Create Employee</a>
+<form class="form-inline">
+    <div class="form-group">
+        <label >Поиск</label>
+        <input type="text" ng-model="search.name" class="form-control" placeholder="Search">
+    </div>
+</form>
 <table border="1">
     <tr>
         <th>Название</th>
@@ -47,7 +54,7 @@
         <th>Delete</th>
     </tr>
     <!-- $scope.employees -->
-    <tr ng-repeat="employee in employees" class="table-cell">
+    <tr dir-paginate="employee in employees|filter:search|itemsPerPage:5" class="table-cell">
         <td> {{ employee.name }}</td>
         <td>{{ employee.count }}</td>
         <td>
@@ -58,6 +65,12 @@
         </td>
     </tr>
 </table>
-
+<ul style="display: inline; list-style: none; padding: 5px">
+<dir-pagination-controls
+        max-size="5"
+        direction-links="true"
+        boundary-links="true" >
+</dir-pagination-controls>
+</ul>
 </body>
 </html>
